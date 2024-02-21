@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 11:54:44 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/02/16 16:23:24 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/02/21 13:01:53 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,17 +34,16 @@ void	free_split(char **split)
 void printList(t_lst* head) {
     t_lst* temp = head;
     while(temp != NULL) {
-        printf("%d ", temp->num);
+        printf("NUM:%d---INDEX:%i\n", temp->num, temp->index);
         temp = temp->next;
     }
-    printf("\n");
+//    printf("\n");
 }
-
 int main(int argc, char **argv)
 {
 	if(argc >= 2)
 	{
-		t_lst	*stack_a;//PRIMER NODO
+		t_lst	*stack_a;
 		t_lst	*aux_a;
 		t_lst	*stack_b;
 		char	**split;
@@ -54,6 +53,7 @@ int main(int argc, char **argv)
 		stack_a = NULL;
 		aux_a = stack_a;
 		stack_b = NULL;
+		split = NULL;
 		if(argc == 2)
 		{
 			atexit(ft_leaks);
@@ -62,24 +62,57 @@ int main(int argc, char **argv)
 				return (0);	
 			while(split[i] != (void *)0)
 			{
-				if(ft_str_is_numeric(split[i]) == 1 && (ft_atol(split[i]) <= FT_INT_MAX && ft_atol(split[i]) >= FT_INT_MIN))
-				{	
+				if(ft_str_is_numeric(split[i]) == 1 && (ft_atol(split[i]) <= FT_INT_MAX
+					&& ft_atol(split[i]) >= FT_INT_MIN))
+				{
 					aux_a = ft_lstnew_ps(ft_atoi(split[i]));
 					ft_lstadd_back_ps(&stack_a, aux_a);
+					if(ft_lstcompare(&stack_a, ft_atol(split[i])) == 1)
+					{
+						ft_printf("ERROR\n");
+						ft_free_stack(stack_a);
+						return (0);
+					}
 				}else
 				{
-					ft_printf("ERROR\nNUMERO NO VALIDO");
+					ft_printf("ERROR\n");
 					ft_free_stack(stack_a);
 					return (0);
 				}
 				i++;
 			}
+			ft_get_index(&stack_a);
 			free_split(split);
+		}else
+		{
+			i = 1;
+			while(i < argc)
+			{
+				if(ft_str_is_numeric(argv[i]) == 1 && (ft_atol(argv[i]) <= FT_INT_MAX
+					&& ft_atol(argv[i]) >= FT_INT_MIN))
+				{
+					aux_a = ft_lstnew_ps(ft_atoi(argv[i]));
+					ft_lstadd_back_ps(&stack_a, aux_a);
+					if(ft_lstcompare(&stack_a, ft_atol(argv[i])) == 1)
+					{
+						ft_printf("ERROR\n");
+						ft_free_stack(stack_a);
+						return (0);
+					}
+				}else
+				{
+					ft_printf("ERROR\n");
+					ft_free_stack(stack_a);
+					return (0);
+				}
+				i++;
+			}
+			ft_get_index(&stack_a);
 		}
+		sort(&stack_a);
 		printList(stack_a);
+		
 		ft_free_stack(stack_a);
 	}
-	else
-		ft_printf("ERROR\nNUMERO DE ARGUMENTOS NO VALIDO");
 	return (0);
 }

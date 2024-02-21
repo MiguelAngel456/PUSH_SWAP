@@ -6,13 +6,11 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 17:07:27 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/02/16 16:20:03 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/02/21 12:47:28 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-
 
 t_lst	*ft_lstnew_ps(int content)
 {
@@ -29,7 +27,7 @@ t_lst	*ft_lstnew_ps(int content)
 void	ft_lstadd_back_ps(t_lst **lst, t_lst *new)
 {
 	t_lst	*temp;
-	
+
 	if (!*lst)
 		*lst = new;
 	else
@@ -38,6 +36,7 @@ void	ft_lstadd_back_ps(t_lst **lst, t_lst *new)
 		while (temp->next != NULL)
 			temp = temp->next;
 		temp->next = new;
+		temp->next->previus = temp;
 	}
 }
 
@@ -53,7 +52,6 @@ void	ft_free_stack(t_lst *lst)
 		current = current->next;
 		free(aux);
 	}
-
 }
 
 static int	ignorar_espacios(int cont, char *str)

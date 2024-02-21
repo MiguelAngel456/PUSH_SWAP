@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 08:34:30 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/01/15 11:37:42 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/02/21 12:28:47 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ char	*ft_strjoin_gnl(char *s1, char *s2)
 		s1[0] = 0;
 	}
 	cont = 0;
-	final = (char *)malloc(sizeof(char) * ft_strlen_gnl(s1) + ft_strlen_gnl(s2) + 1);
+	final = (char *)malloc(sizeof(char) * ft_strlen_gnl(s1)
+			+ ft_strlen_gnl(s2) + 1);
 	if (!final)
 		return (ft_free(s1));
 	cont = aux_gnl(final, s1, cont);

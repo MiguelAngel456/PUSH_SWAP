@@ -7,8 +7,12 @@ RM = rm -f
 LIBFT_PATH = ./libft
 
 #ARCHIVOS
-FILES = push_swap.c\
+FILES = archive_sort.c\
+		operations.c\
+		operations_2.c\
 		push_swap_utils.c\
+		push_swap_utils_2.c\
+		push_swap.c\
 
 #CREA LOS ARCHIVOS OBJETO
 OBJS = $(FILES:.c=.o)
@@ -36,4 +40,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fclean re

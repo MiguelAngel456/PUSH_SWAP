@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 13:48:37 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/02/15 16:07:01 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/02/21 12:27:59 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	ft_str_is_numeric(char *str)
 	int	cont;
 
 	cont = 0;
-	if(str[0] == '-')
+	if (str[0] == '-' && ft_strlen(str) > 1)
 		cont++;
 	if (str[0] == '\0')
 	{
