@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 09:44:00 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/02/21 12:45:17 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/02/22 09:43:48 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	ft_lstcompare(t_lst **lst, int num_comp)
 	return (0);
 }
 
-void	ft_get_index(t_lst **lst)
+void	ft_get_index_f(t_lst **lst)
 {
 	t_lst	*temp;
 	t_lst	*temp2;
@@ -50,10 +50,25 @@ void	ft_get_index(t_lst **lst)
 		{
 			if (aux < temp2->num)
 			{
-				temp2->index++;
+				temp2->index_f++;
 			}
 			temp2 = temp2->next;
 		}
+		temp = temp->next;
+	}
+}
+
+void	ft_get_index(t_lst **lst)
+{
+	t_lst	*temp;
+	int		aux;
+
+	temp = *lst;
+	aux = 0;
+	while (temp != NULL)
+	{
+		temp->index = aux;
+		aux++;
 		temp = temp->next;
 	}
 }

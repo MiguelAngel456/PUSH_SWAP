@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 16:54:47 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/02/21 12:32:41 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/02/23 18:46:50 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,37 +27,37 @@ static void	sort_two(t_lst **stack)
 
 static void	sort_three_2(t_lst **stack, t_lst *temp, t_lst *last)
 {
-	if (temp->index > last->index && temp->next->index < last->index)
+	if (temp->index_f > last->index_f && temp->next->index_f < last->index_f)
 		rotate(stack, 'a');
 	else
 	{
-		if (temp->next->index > last->index && temp->next->index > temp->index
-			&& last->index > temp->index)
+		if (temp->next->index_f > last->index_f && temp->next->index_f > temp->index_f
+			&& last->index_f > temp->index_f)
 		{
 			swap(&temp, 'a');
 			rotate(stack, 'a');
 		}
 		else
 		{
-			if (temp->next->index > last->index
-				&& temp->next->index > temp->index
-				&& last->index < temp->index)
+			if (temp->next->index_f > last->index_f
+				&& temp->next->index_f > temp->index_f
+				&& last->index_f < temp->index_f)
 				reverse_rotate(stack, 'a');
 		}
 	}
 }
 
-static void	sort_three(t_lst **stack)
+void	sort_three(t_lst **stack)
 {
 	t_lst	*temp;
 	t_lst	*last;
 
 	temp = *stack;
 	last = temp->next->next;
-	if (temp->index < last->index && temp->next->index < last->index)
+	if (temp->index_f < last->index_f && temp->next->index_f < last->index_f)
 		swap(&temp, 'a');
-	if (temp->index > last->index
-		&& temp->next->index < temp->index && temp->next->index > last->index)
+	if (temp->index_f > last->index_f
+		&& temp->next->index_f < temp->index_f && temp->next->index_f > last->index_f)
 	{
 		swap(&temp, 'a');
 		reverse_rotate(stack, 'a');
@@ -68,7 +68,7 @@ static void	sort_three(t_lst **stack)
 	}
 }
 
-void	sort(t_lst **stack_a)
+void	sort(t_lst **stack_a, t_lst **stack_b)
 {
 	if (ft_lstsize_ps(*stack_a) == 2)
 		sort_two(stack_a);
@@ -76,5 +76,7 @@ void	sort(t_lst **stack_a)
 	{
 		if (ft_lstsize_ps(*stack_a) == 3)
 			sort_three(stack_a);
+		else
+			sort_final(stack_a, stack_b);
 	}
 }

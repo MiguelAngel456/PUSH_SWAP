@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 11:54:44 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/02/21 13:01:53 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/02/23 18:37:36 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,11 @@ void	free_split(char **split)
 
 void printList(t_lst* head) {
     t_lst* temp = head;
-    while(temp != NULL) {
-        printf("NUM:%d---INDEX:%i\n", temp->num, temp->index);
-        temp = temp->next;
-    }
-//    printf("\n");
+	while(temp != NULL) {
+		printf("NUM:%d---INDEX:%i---INDEX FINAL:%i---DESTINO FINAL:%i---COSTE:%i\n", temp->num, temp->index, temp->index_f, temp->node_dst->num,temp->cost);
+		//printf("NUM:%d---INDEX:%i---INDEX FINAL:%i\n", temp->num, temp->index, temp->index_f);
+		temp = temp->next;
+	}
 }
 int main(int argc, char **argv)
 {
@@ -82,6 +82,7 @@ int main(int argc, char **argv)
 				i++;
 			}
 			ft_get_index(&stack_a);
+			ft_get_index_f(&stack_a);
 			free_split(split);
 		}else
 		{
@@ -108,9 +109,10 @@ int main(int argc, char **argv)
 				i++;
 			}
 			ft_get_index(&stack_a);
+			ft_get_index_f(&stack_a);
 		}
-		sort(&stack_a);
-		printList(stack_a);
+		sort(&stack_a, &stack_b);
+		//printList(stack_a);
 		
 		ft_free_stack(stack_a);
 	}
