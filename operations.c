@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 12:13:30 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/02/22 10:35:20 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/02/27 12:16:53 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,13 @@ void	push(t_lst **dst, t_lst **src, char tipo)
 	temp2 = (*src);
 	aux = temp2;
 	temp2 = temp2->next;
-	*src = temp2;
-	temp2->previus->next = NULL;
-	temp2->previus = NULL;
+	if(temp2 != NULL)
+	{
+		*src = temp2;
+
+		temp2->previus->next = NULL;
+		temp2->previus = NULL;
+	}
 	if (!temp)
 	{
 		temp = aux;

@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 16:54:47 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/02/24 12:49:32 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/02/27 15:26:12 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,27 +85,32 @@ static void	node_dest_a_b(t_lst **stack_a, t_lst **stack_b)
 void printList2(t_lst* head) {
     t_lst* temp = head;
 	while(temp != NULL) {
-		printf("NUM:%d---INDEX:%i\n", temp->num, temp->index);
+		printf("NUM:%d---INDEX:%i---DESTINO FINAL:%i\n", temp->num, temp->index, temp->node_dst->num);
 		temp = temp->next;
 	}
 }
 void	sort_final(t_lst **stack_a, t_lst **stack_b)
 {
 	int		size_a;
+	int		size_b;
 	t_lst	*temp;
 	t_lst	*loc;
 
 	temp = *stack_a;
-	size_a = ft_lstsize_ps(*stack_a);
-	if(!*stack_b)
+	if(!*stack_b && ft_lstsize_ps(*stack_a) > 4)
 	{
 		push(stack_b, stack_a, 'b');
+		push(stack_b, stack_a, 'b');
+	}
+	else
+	{
 		push(stack_b, stack_a, 'b');
 	}
 	ft_get_index(stack_a);
 	ft_get_index(stack_b);
 	node_dest_a_b(stack_a, stack_b);
 	cost(stack_a, stack_b);
+	size_a = ft_lstsize_ps(*stack_a);
  	while (size_a != 3)
 	{
 		loc = low_cost(stack_a);
@@ -121,7 +126,21 @@ void	sort_final(t_lst **stack_a, t_lst **stack_b)
 	}
 	sort_three(stack_a);
 	ft_get_index(stack_a);
-	printList2(*stack_b);
-	ft_printf("*************************\n");
+	node_dest_b_a(stack_b, stack_a);
+	node_dest_a_b(stack_a, stack_b);
+	size_b = ft_lstsize_ps(*stack_b);
+	temp = *stack_b;
+ 	while(size_b > 0)
+	{
+		fill_a(*stack_b, stack_a);
+		push(stack_a, stack_b, 'a');
+		ft_get_index(stack_a);
+		ft_get_index(stack_b);
+		node_dest_b_a(stack_b, stack_a);
+		size_b--;
+	}
+
+	lower_num_final(stack_a);
+	printf("*******************************\n");
 	printList2(*stack_a);
 }

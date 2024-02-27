@@ -1,13 +1,14 @@
 #VARIABLES
 NAME = push_swap
 BONUS_NAME = so_long_bonus
-CC = gcc -Wall -Werror -Wextra
+CC = cc
 AR = ar rcs
 RM = rm -f
 LIBFT_PATH = ./libft
 
 #ARCHIVOS
-FILES = archive_sort_3.c\
+FILES = archive_sort_4.c\
+		archive_sort_3.c\
 		archive_sort_2.c\
 		archive_sort.c\
 		operations.c\

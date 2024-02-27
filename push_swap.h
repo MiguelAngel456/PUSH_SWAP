@@ -44,5 +44,8 @@ t_lst	*low_cost(t_lst **stack);
 void	prepare_b(t_lst *stack_a, t_lst **stack_b);
 void	prepare_a(t_lst *loc, t_lst **stack_a);
 void	sort_three(t_lst **stack);
+void	node_dest_b_a(t_lst **stack_b, t_lst **stack_a);
+void	fill_a(t_lst *src, t_lst **stack_a);
+void	lower_num_final(t_lst **stack_a);
 
 #endif

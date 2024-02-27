@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 14:54:12 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/02/26 09:44:08 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/02/26 17:35:27 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,35 +84,46 @@ void	prepare_a(t_lst *loc, t_lst **stack_a)
 	}
 }
 
-static void	node_dest_b_a(t_lst **stack_a, t_lst **stack_b)
+static t_lst	*search_min(t_lst **stack)
 {
- 	int		max;
-	int		num_a;
 	t_lst	*temp;
-	t_lst	*temp2;
+	t_lst	*min;
 
- 	temp = *stack_b;
-	num_a = temp->num;
-	temp2 = *stack_a;
+ 	temp = *stack;
+	min = temp;
 	while(temp != NULL)
 	{
-		
-		num_a = temp->num;
-		temp2 = *stack_a;
-		while(temp2 != NULL)
-		{	
-			if(num_a < temp2->num)
-			{
-				if(temp->num < max)
-				{
-					temp->node_dst = temp2;
-					max = temp->node_dst->num;
-				}
-			}			
-			temp2 = temp2->next;			
-		}
-		if(!temp->node_dst)
-			temp->node_dst = search_max(stack_a);
+		if(temp->num < min->num)
+			min = temp;
 		temp = temp->next;
+	}
+	return (min);
+}
+
+void	node_dest_b_a(t_lst **stack_b, t_lst **stack_a)
+{
+ 	int		aux;
+	t_lst	*temp_a;
+	t_lst	*temp_b;
+
+	temp_b = *stack_b;
+	aux = 2147483647;
+	while(temp_b != NULL)
+	{
+	 	temp_a = *stack_a;
+		temp_b->node_dst = NULL;
+		aux = 2147483647;
+		while(temp_a != NULL)
+		{
+			if((temp_b->num < temp_a->num) && (temp_a->num < aux))
+			{
+				aux = temp_a->num;
+				temp_b->node_dst = temp_a;
+			}
+			temp_a = temp_a->next;
+		}
+		if(!temp_b->node_dst)
+			temp_b->node_dst = search_min(stack_a);
+		temp_b = temp_b->next;
 	}
 }

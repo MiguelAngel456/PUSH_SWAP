@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 16:54:47 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/02/23 18:46:50 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/02/27 15:23:58 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,25 +46,48 @@ static void	sort_three_2(t_lst **stack, t_lst *temp, t_lst *last)
 		}
 	}
 }
-
+//PRIMER IF: SI EL DEL MEDIO ES MAS PEQUEÑO QUE EL PRIMERO Y EL PRIMERO MAS PEQUEÑO QUE EL ULTIMO
+//
+//SEGUNDO IF: SI EL DEL MEDIO ES MAS PEQUEÑO QUE EL PRIMERO, SI EL ULTIMO ES MAS PEQUEÑO QUE EL PRIMERO
+//			  Y EL ULTIMO ES MAS GRANDE QUE EL DEL MEDIO
+//
+//TERCER IF: SI EL DEL MEDIO ES MAS GRANDE QUE EL PRIMERO, SI EL DEL MEDIO ES MAS GRANDE QUE EL ULTIMO
+//			 Y SI EL PRIMERO ES MAS PEQUEÑO QUE EL ULTIMO
+//
+//CUARTO IF: SI EL DEL MEDIO ES MAYOR AL PRIMERO, SI EL DEL MEDIO ES MAYOR AL ULTIMO Y SI EL PRIMERO ES
+//			 MAYOR AL ULTIMO
+//
+//QUINTO IF: SI EL DEL MEDIO ES MAYOR A AL PRIMERO, EL DEL MEDIO ES AL ULTIMO Y EL PRIMERO ES MAYOR A
+//			 AL ULTIMO
+//
+//SEXTO IF: SI EL PRIMERO ES MAYOR AL DEL MEDIO, EL PRIMERO ES MAYOR AL ULTIMO Y EL DEL MEDIO ES MAYOR 
+//			AL ULTIMO
 void	sort_three(t_lst **stack)
 {
-	t_lst	*temp;
-	t_lst	*last;
-
-	temp = *stack;
-	last = temp->next->next;
-	if (temp->index_f < last->index_f && temp->next->index_f < last->index_f)
-		swap(&temp, 'a');
-	if (temp->index_f > last->index_f
-		&& temp->next->index_f < temp->index_f && temp->next->index_f > last->index_f)
+	if ((*stack)->num > (*stack)->next->num
+		&& (*stack)->num < (*stack)->next->next->num)
+		swap(stack, 'a');
+	else if ((*stack)->num > (*stack)->next->num
+		&& (*stack)->num > (*stack)->next->next->num
+		&& (*stack)->next->num < (*stack)->next->next->num)
+		rotate(stack, 'a');
+	else if ((*stack)->next->num > (*stack)->num
+		&& (*stack)->next->num > (*stack)->next->next->num
+		&& (*stack)->num < (*stack)->next->next->num)
 	{
-		swap(&temp, 'a');
-		reverse_rotate(stack, 'a');
+		swap(stack, 'a');
+		rotate(stack, 'a');
 	}
-	else
+	else if ((*stack)->next->num > (*stack)->num
+		&& (*stack)->next->num > (*stack)->next->next->num
+		&& (*stack)->num > (*stack)->next->next->num)
+		reverse_rotate(stack, 'a');
+	else if ((*stack)->num > (*stack)->next->num
+		&& (*stack)->num > (*stack)->next->next->num
+		&& (*stack)->next->num > (*stack)->next->next->num)
 	{
-		sort_three_2(stack, temp, last);
+		swap(stack, 'a');
+		reverse_rotate(stack, 'a');
 	}
 }
 
