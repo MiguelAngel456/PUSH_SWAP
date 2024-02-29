@@ -5,6 +5,7 @@
 # include <stdarg.h>
 # include "./libft/libft.h"
 # include <fcntl.h>
+# include <stdbool.h>
 # include <stdlib.h>
 
 typedef struct s_lst
@@ -42,7 +43,7 @@ void	ft_get_index(t_lst **lst);
 void	sort_final();
 t_lst	*low_cost(t_lst **stack);
 void	prepare_b(t_lst *stack_a, t_lst **stack_b);
-void	prepare_a(t_lst *loc, t_lst **stack_a);
+void	prepare_a(t_lst *loc, t_lst **stack_a, t_lst **stack_b);
 void	sort_three(t_lst **stack);
 void	node_dest_b_a(t_lst **stack_b, t_lst **stack_a);
 void	fill_a(t_lst *src, t_lst **stack_a);

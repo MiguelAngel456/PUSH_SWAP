@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 16:54:47 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/02/27 15:23:58 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/02/27 15:35:10 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ static void	sort_three_2(t_lst **stack, t_lst *temp, t_lst *last)
 		rotate(stack, 'a');
 	else
 	{
-		if (temp->next->index_f > last->index_f && temp->next->index_f > temp->index_f
+		if (temp->next->index_f > last->index_f
+			&& temp->next->index_f > temp->index_f
 			&& last->index_f > temp->index_f)
 		{
 			swap(&temp, 'a');

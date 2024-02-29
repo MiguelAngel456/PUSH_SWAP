@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 14:54:12 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/02/26 17:35:27 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/02/28 16:35:56 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	prepare_b(t_lst *stack_a, t_lst **stack_b)
 	}
 }
 
-void	prepare_a(t_lst *loc, t_lst **stack_a)
+void	prepare_a(t_lst *loc, t_lst **stack_a, t_lst **stack_b)
 {
 	t_lst	*temp;
 	int		size;
@@ -67,12 +67,13 @@ void	prepare_a(t_lst *loc, t_lst **stack_a)
 	{
 		if (loc->node_dst->num == temp->num)
 		{
+			ft_printf("------\n");
 			if (temp->index != 0)
 			{
 				if (temp->index > size/2)
-					reverse_rotate(stack_a, 'b');
+					reverse_rotate_rrr(stack_a, stack_b);
 				else
-					rotate(stack_a, 'b');
+					rotate_rr(stack_a, stack_b);
 				ft_get_index(stack_a);
 				temp = *stack_a;
 			}

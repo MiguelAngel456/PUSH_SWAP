@@ -6,11 +6,25 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 11:54:44 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/02/26 10:53:50 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/02/29 16:32:40 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+static int	is_order(t_lst **head)
+{
+	t_lst	*temp;
+
+	temp = *head;
+	while(temp->next != NULL)
+	{
+		if(temp->num > temp->next->num)
+			return (1);
+		temp = temp->next;
+	}
+	return (0);
+}
 
 void	ft_leaks(void)
 {
@@ -34,7 +48,7 @@ void	free_split(char **split)
 void printList(t_lst* head) {
     t_lst* temp = head;
 	while(temp != NULL) {
-		printf("NUM:%d---INDEX:%i---INDEX FINAL:%i---DESTINO FINAL:%i---COSTE:%i\n", temp->num, temp->index, temp->index_f, temp->node_dst->num,temp->cost);
+		printf("NUM:%d---INDEX:%i\n", temp->num, temp->index);
 		//printf("NUM:%d---INDEX:%i---INDEX FINAL:%i\n", temp->num, temp->index, temp->index_f);
 		temp = temp->next;
 	}
@@ -56,7 +70,13 @@ int main(int argc, char **argv)
 		split = NULL;
 		if(argc == 2)
 		{
-			atexit(ft_leaks);
+			if (ft_strlen(argv[1]) == 0)
+			{
+				write(2, "Error\n", 6);
+				ft_free_stack(stack_a);
+				return (0);
+			}
+			//atexit(ft_leaks);
 			split = ft_split(argv[1], ' ');
 			if (!split)
 				return (0);	
@@ -69,13 +89,13 @@ int main(int argc, char **argv)
 					ft_lstadd_back_ps(&stack_a, aux_a);
 					if(ft_lstcompare(&stack_a, ft_atol(split[i])) == 1)
 					{
-						ft_printf("ERROR\n");
+						write(2, "Error\n", 6);
 						ft_free_stack(stack_a);
 						return (0);
 					}
 				}else
 				{
-					ft_printf("ERROR\n");
+					write(2, "Error\n", 6);
 					ft_free_stack(stack_a);
 					return (0);
 				}
@@ -96,13 +116,13 @@ int main(int argc, char **argv)
 					ft_lstadd_back_ps(&stack_a, aux_a);
 					if(ft_lstcompare(&stack_a, ft_atol(argv[i])) == 1)
 					{
-						ft_printf("ERROR\n");
+						write(2, "Error\n", 6);
 						ft_free_stack(stack_a);
 						return (0);
 					}
 				}else
 				{
-					ft_printf("ERROR\n");
+					write(2, "Error\n", 6);
 					ft_free_stack(stack_a);
 					return (0);
 				}
@@ -111,10 +131,10 @@ int main(int argc, char **argv)
 			ft_get_index(&stack_a);
 			ft_get_index_f(&stack_a);
 		}
-		sort(&stack_a, &stack_b);
-		//printList(stack_a);
-		
+		if(is_order(&stack_a) == 1)
+			sort(&stack_a, &stack_b);
 		ft_free_stack(stack_a);
+		//printList(stack_a);
 	}
 	return (0);
 }

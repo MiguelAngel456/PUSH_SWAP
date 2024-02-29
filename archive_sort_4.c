@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 14:54:12 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/02/27 12:34:54 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/02/29 12:14:12 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,22 +44,20 @@ void	lower_num_final(t_lst **stack_a)
 {
 	t_lst	*temp;
 	t_lst	*min;
-	int		tipe;
 
 	temp = *stack_a;
 	min = temp;
 	while (temp != NULL)
 	{
 		if(min->num > temp->num)
+		{
 			min = temp;
+		}
 		temp = temp->next;
 	}
-	tipe = 2;
-	if (min->index <= (ft_lstsize_ps(*stack_a)/2))
-		tipe = 1;
 	while (min->index != 0)
 	{
-		if(tipe == 1)
+		if(min->index <= (ft_lstsize_ps(*stack_a)/2))
 			rotate(stack_a, 'a');
 		else
 			reverse_rotate(stack_a, 'a');

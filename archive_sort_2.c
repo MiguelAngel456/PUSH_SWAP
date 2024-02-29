@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 16:54:47 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/02/27 15:26:12 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/02/29 15:46:41 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,13 +82,6 @@ static void	node_dest_a_b(t_lst **stack_a, t_lst **stack_b)
 		temp = temp->next;
 	}
 }
-void printList2(t_lst* head) {
-    t_lst* temp = head;
-	while(temp != NULL) {
-		printf("NUM:%d---INDEX:%i---DESTINO FINAL:%i\n", temp->num, temp->index, temp->node_dst->num);
-		temp = temp->next;
-	}
-}
 void	sort_final(t_lst **stack_a, t_lst **stack_b)
 {
 	int		size_a;
@@ -114,8 +107,6 @@ void	sort_final(t_lst **stack_a, t_lst **stack_b)
  	while (size_a != 3)
 	{
 		loc = low_cost(stack_a);
-		prepare_b(loc, stack_b);
-		prepare_a(loc, stack_a);
 		push(stack_b, stack_a, 'b');
 
 		ft_get_index(stack_a);
@@ -124,12 +115,14 @@ void	sort_final(t_lst **stack_a, t_lst **stack_b)
 		cost(stack_a, stack_b);
 		node_dest_a_b(stack_a, stack_b);
 	}
+//	ft_printf("--------------------------------\n");
 	sort_three(stack_a);
 	ft_get_index(stack_a);
 	node_dest_b_a(stack_b, stack_a);
 	node_dest_a_b(stack_a, stack_b);
 	size_b = ft_lstsize_ps(*stack_b);
 	temp = *stack_b;
+//	ft_printf("++++++++++++++++++++++++++++++++\n");
  	while(size_b > 0)
 	{
 		fill_a(*stack_b, stack_a);
@@ -139,8 +132,6 @@ void	sort_final(t_lst **stack_a, t_lst **stack_b)
 		node_dest_b_a(stack_b, stack_a);
 		size_b--;
 	}
-
+//	ft_printf("*******************************\n");
 	lower_num_final(stack_a);
-	printf("*******************************\n");
-	printList2(*stack_a);
 }

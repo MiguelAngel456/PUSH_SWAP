@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 15:23:36 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/02/21 12:35:09 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/02/28 14:36:46 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,5 +76,5 @@ void	reverse_rotate_rrr(t_lst **stack_a, t_lst **stack_b)
 {
 	reverse_rotate(stack_a, ' ');
 	reverse_rotate(stack_b, ' ');
-	ft_printf("rrr");
+	ft_printf("rrr\n");
 }
