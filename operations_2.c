@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 15:23:36 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/02/28 14:36:46 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/03/01 12:55:18 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,9 @@ void	rotate(t_lst **stack, char tipo)
 	else
 	{
 		if (tipo == 'b')
+		{
 			ft_printf("rb\n");
+		}
 	}
 }
 
@@ -68,7 +70,9 @@ void	reverse_rotate(t_lst **stack, char tipo)
 	else
 	{
 		if (tipo == 'b')
+		{
 			ft_printf("rrb\n");
+		}
 	}
 }
 

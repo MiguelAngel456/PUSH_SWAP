@@ -1,7 +1,7 @@
 #VARIABLES
 NAME = push_swap
 BONUS_NAME = so_long_bonus
-CC = cc
+CC = gcc -Wall -Werror -Wextra
 AR = ar rcs
 RM = rm -f
 LIBFT_PATH = ./libft

@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 16:54:47 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/02/27 15:35:10 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/03/01 10:09:38 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,28 +25,6 @@ static void	sort_two(t_lst **stack)
 	}
 }
 
-static void	sort_three_2(t_lst **stack, t_lst *temp, t_lst *last)
-{
-	if (temp->index_f > last->index_f && temp->next->index_f < last->index_f)
-		rotate(stack, 'a');
-	else
-	{
-		if (temp->next->index_f > last->index_f
-			&& temp->next->index_f > temp->index_f
-			&& last->index_f > temp->index_f)
-		{
-			swap(&temp, 'a');
-			rotate(stack, 'a');
-		}
-		else
-		{
-			if (temp->next->index_f > last->index_f
-				&& temp->next->index_f > temp->index_f
-				&& last->index_f < temp->index_f)
-				reverse_rotate(stack, 'a');
-		}
-	}
-}
 //PRIMER IF: SI EL DEL MEDIO ES MAS PEQUEÑO QUE EL PRIMERO Y EL PRIMERO MAS PEQUEÑO QUE EL ULTIMO
 //
 //SEGUNDO IF: SI EL DEL MEDIO ES MAS PEQUEÑO QUE EL PRIMERO, SI EL ULTIMO ES MAS PEQUEÑO QUE EL PRIMERO

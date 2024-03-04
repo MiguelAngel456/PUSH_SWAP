@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 14:54:12 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/02/28 16:35:56 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/03/04 09:49:41 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,18 @@ t_lst	*low_cost(t_lst **stack)
 {
 	t_lst	*temp;
 	t_lst	*final;
+	int		cheapest_value;
 
 	temp = *stack;
 	final = temp;
+	cheapest_value = 2147483647;
 	while(temp != NULL)
 	{
-		if(temp->cost < final->cost)
+		if(temp->cost < cheapest_value)
+		{
+			cheapest_value = temp->cost;
 			final = temp;
+		}
 		temp = temp->next;
 	}
 	return (final);

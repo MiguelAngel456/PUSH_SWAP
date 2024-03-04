@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 11:54:44 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/02/29 16:32:40 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/03/01 12:31:21 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,8 +133,8 @@ int main(int argc, char **argv)
 		}
 		if(is_order(&stack_a) == 1)
 			sort(&stack_a, &stack_b);
-		ft_free_stack(stack_a);
 		//printList(stack_a);
+		ft_free_stack(stack_a);
 	}
 	return (0);
 }
