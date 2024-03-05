@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 12:13:30 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/03/01 12:36:25 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/03/04 16:31:27 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,19 @@ void	swap_ss(t_lst **stack_a, t_lst **stack_b)
 	ft_printf("ss\n");
 }
 
-static void	help_push(char tipo)
+static void	help_push(char tipo, t_lst *temp, t_lst **dst, t_lst *aux)
 {
+	if (!temp)
+	{
+		temp = aux;
+		*dst = temp;
+	}
+	else
+	{
+		temp->previus = aux;
+		temp->previus->next = temp;
+		*dst = temp->previus;
+	}
 	if (tipo == 'a')
 		ft_printf("pa\n");
 	else
@@ -65,25 +76,13 @@ void	push(t_lst **dst, t_lst **src, char tipo)
 	temp2 = (*src);
 	aux = temp2;
 	temp2 = temp2->next;
-	if(temp2 != NULL)
+	if (temp2 != NULL)
 	{
 		*src = temp2;
-
 		temp2->previus->next = NULL;
 		temp2->previus = NULL;
 	}
-	if (!temp)
-	{
-		temp = aux;
-		*dst = temp;
-	}
-	else
-	{
-		temp->previus = aux;
-		temp->previus->next = temp;
-		*dst = temp->previus;
-	}
-	help_push(tipo);
+	help_push(tipo, temp, dst, aux);
 }
 
 void	push_pp(t_lst **stack_a, t_lst **stack_b)

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/04 15:41:17 by mfuente-          #+#    #+#             */
+/*   Updated: 2024/03/05 14:54:09 by mfuente-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
@@ -10,14 +22,14 @@
 
 typedef struct s_lst
 {
-	int				num; //NUMERO
-    int				index; //POSICION 
-    int				index_f; //POSICION FINAL
-    int				cost; //COSTE 
-	struct s_lst	*node_dst; //NODO DESTINO
-	struct s_lst	*next; //SIGUIENTE
-    struct s_lst    *previus; //ANTERIOR
-}	t_lst; //APODO
+	int				num;//NUMERO
+	int				index;//POSICION 
+	int				index_f;//POSICION FINAL
+	int				cost;//COSTE 
+	struct s_lst	*node_dst;//NODO DESTINO
+	struct s_lst	*next;//SIGUIENTE
+	struct s_lst	*previus;//ANTERIOR
+}	t_lst;//APODO
 
 //FUNCIONES
 int		check_is_number(char num);
@@ -40,7 +52,7 @@ void	reverse_rotate_rrr(t_lst **stack_a, t_lst **stack_b);
 int		ft_lstsize_ps(t_lst *lst);
 void	sort(t_lst **stack_a, t_lst **stack_b);
 void	ft_get_index(t_lst **lst);
-void	sort_final();
+void	sort_final(t_lst **stack_a, t_lst **stack_b);
 t_lst	*low_cost(t_lst **stack);
 void	prepare_b(t_lst *stack_a, t_lst **stack_b);
 void	prepare_a(t_lst *loc, t_lst **stack_a, t_lst **stack_b);
@@ -48,5 +60,9 @@ void	sort_three(t_lst **stack);
 void	node_dest_b_a(t_lst **stack_b, t_lst **stack_a);
 void	fill_a(t_lst *src, t_lst **stack_a);
 void	lower_num_final(t_lst **stack_a);
+void	ft_move_a_to_b(t_lst **a, t_lst **b, t_lst *loc);
+int		erros(t_lst **stack);
+int		help_normi_2(char **argv, t_lst *stack_a, int argc, t_lst *stack_b);
+int		is_order(t_lst **head);
 
 #endif
