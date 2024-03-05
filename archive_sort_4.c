@@ -6,7 +6,7 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 14:54:12 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/02/29 12:14:12 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/03/04 12:30:18 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	fill_a(t_lst *src, t_lst **stack_a)
 		{
 			if (temp->index != 0)
 			{
-				if (temp->index <= size/2)
+				if (temp->index <= size / 2)
 					rotate(stack_a, 'a');
 				else
 					reverse_rotate(stack_a, 'a');
@@ -49,7 +49,7 @@ void	lower_num_final(t_lst **stack_a)
 	min = temp;
 	while (temp != NULL)
 	{
-		if(min->num > temp->num)
+		if (min->num > temp->num)
 		{
 			min = temp;
 		}
@@ -57,7 +57,7 @@ void	lower_num_final(t_lst **stack_a)
 	}
 	while (min->index != 0)
 	{
-		if(min->index <= (ft_lstsize_ps(*stack_a)/2))
+		if (min->index <= (ft_lstsize_ps(*stack_a) / 2))
 			rotate(stack_a, 'a');
 		else
 			reverse_rotate(stack_a, 'a');

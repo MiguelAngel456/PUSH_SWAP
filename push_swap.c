@@ -6,31 +6,38 @@
 /*   By: mfuente- <mfuente-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 11:54:44 by mfuente-          #+#    #+#             */
-/*   Updated: 2024/03/01 12:31:21 by mfuente-         ###   ########.fr       */
+/*   Updated: 2024/03/05 15:03:01 by mfuente-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static int	is_order(t_lst **head)
+int	is_order(t_lst **head)
 {
 	t_lst	*temp;
 
 	temp = *head;
-	while(temp->next != NULL)
+	while (temp->next != NULL)
 	{
-		if(temp->num > temp->next->num)
+		if (temp->num > temp->next->num)
 			return (1);
 		temp = temp->next;
 	}
 	return (0);
 }
 
-void	ft_leaks(void)
+int	erros(t_lst **stack)
 {
-	system("leaks push_swap > leaks.txt");
+	write(2, "Error\n", 6);
+	ft_free_stack(*stack);
+	return (1);
 }
 
+/* void	ft_leaks(void)
+{
+	system("leaks push_swap > leaks.txt");
+	//atexit(ft_leaks);
+} */
 void	free_split(char **split)
 {
 	int	i;
@@ -45,95 +52,59 @@ void	free_split(char **split)
 	free(split);
 }
 
-void printList(t_lst* head) {
-    t_lst* temp = head;
-	while(temp != NULL) {
-		printf("NUM:%d---INDEX:%i\n", temp->num, temp->index);
-		//printf("NUM:%d---INDEX:%i---INDEX FINAL:%i\n", temp->num, temp->index, temp->index_f);
-		temp = temp->next;
-	}
-}
-int main(int argc, char **argv)
+static int	help_normi(char **argv, t_lst *stack_a, t_lst *aux_a, int i)
 {
-	if(argc >= 2)
-	{
-		t_lst	*stack_a;
-		t_lst	*aux_a;
-		t_lst	*stack_b;
-		char	**split;
-		int		i;
+	char	**split;
 
+	if (ft_strlen(argv[1]) == 0)
+		return (erros(&stack_a));
+	split = ft_split(argv[1], ' ');
+	if (!split)
+		return (1);
+	while (split[i] != (void *)0)
+	{
+		if (ft_str_is_numeric(split[i]) == 1
+			&& (ft_atol(split[i]) <= FT_INT_MAX
+				&& ft_atol(split[i]) >= FT_INT_MIN))
+		{
+			aux_a = ft_lstnew_ps(ft_atoi(split[i]));
+			ft_lstadd_back_ps(&stack_a, aux_a);
+			if (ft_lstcompare(&stack_a, ft_atol(split[i])) == 1)
+				return (erros(&stack_a));
+		}
+		else
+			return (erros(&stack_a));
+		i++;
+	}
+	ft_get_index(&stack_a);
+	free_split(split);
+	return (0);
+}
+
+int	main(int argc, char **argv)
+{
+	t_lst	*stack_a;
+	t_lst	*aux_a;
+	t_lst	*stack_b;
+	int		i;
+
+	if (argc >= 2)
+	{
 		i = 0;
 		stack_a = NULL;
 		aux_a = stack_a;
-		stack_b = NULL;
-		split = NULL;
-		if(argc == 2)
+		if (argc == 2)
 		{
-			if (ft_strlen(argv[1]) == 0)
-			{
-				write(2, "Error\n", 6);
-				ft_free_stack(stack_a);
-				return (0);
-			}
-			//atexit(ft_leaks);
-			split = ft_split(argv[1], ' ');
-			if (!split)
-				return (0);	
-			while(split[i] != (void *)0)
-			{
-				if(ft_str_is_numeric(split[i]) == 1 && (ft_atol(split[i]) <= FT_INT_MAX
-					&& ft_atol(split[i]) >= FT_INT_MIN))
-				{
-					aux_a = ft_lstnew_ps(ft_atoi(split[i]));
-					ft_lstadd_back_ps(&stack_a, aux_a);
-					if(ft_lstcompare(&stack_a, ft_atol(split[i])) == 1)
-					{
-						write(2, "Error\n", 6);
-						ft_free_stack(stack_a);
-						return (0);
-					}
-				}else
-				{
-					write(2, "Error\n", 6);
-					ft_free_stack(stack_a);
-					return (0);
-				}
-				i++;
-			}
-			ft_get_index(&stack_a);
-			ft_get_index_f(&stack_a);
-			free_split(split);
-		}else
-		{
-			i = 1;
-			while(i < argc)
-			{
-				if(ft_str_is_numeric(argv[i]) == 1 && (ft_atol(argv[i]) <= FT_INT_MAX
-					&& ft_atol(argv[i]) >= FT_INT_MIN))
-				{
-					aux_a = ft_lstnew_ps(ft_atoi(argv[i]));
-					ft_lstadd_back_ps(&stack_a, aux_a);
-					if(ft_lstcompare(&stack_a, ft_atol(argv[i])) == 1)
-					{
-						write(2, "Error\n", 6);
-						ft_free_stack(stack_a);
-						return (0);
-					}
-				}else
-				{
-					write(2, "Error\n", 6);
-					ft_free_stack(stack_a);
-					return (0);
-				}
-				i++;
-			}
-			ft_get_index(&stack_a);
-			ft_get_index_f(&stack_a);
+			if (help_normi(argv, stack_a, aux_a, i) == 1)
+				return (1);
+			if (is_order(&stack_a) == 1)
+				sort(&stack_a, &stack_b);
 		}
-		if(is_order(&stack_a) == 1)
-			sort(&stack_a, &stack_b);
-		//printList(stack_a);
+		if (argc > 2)
+		{
+			if (help_normi_2(argv, stack_a, argc, stack_b) == 1)
+				return (1);
+		}
 		ft_free_stack(stack_a);
 	}
 	return (0);

@@ -7,7 +7,9 @@ RM = rm -f
 LIBFT_PATH = ./libft
 
 #ARCHIVOS
-FILES = archive_sort_4.c\
+FILES = help_normi.c\
+		archive_sort_5.c\
+		archive_sort_4.c\
 		archive_sort_3.c\
 		archive_sort_2.c\
 		archive_sort.c\
